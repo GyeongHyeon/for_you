@@ -121,6 +121,31 @@
 <script>
   const audio = document.getElementById('myAudio');
   const container = document.querySelector('.container');
+  const root = document.documentElement;
+
+  let lockedViewportHeight = 0;
+
+  function getViewportHeight() {
+    return window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  }
+
+  function applyViewportHeight(height) {
+    lockedViewportHeight = height;
+    root.style.setProperty('--app-height', `${height}px`);
+  }
+
+  function syncViewportHeight(force = false) {
+    const nextHeight = Math.round(getViewportHeight());
+
+    if (!lockedViewportHeight || force || Math.abs(nextHeight - lockedViewportHeight) > 120) {
+      applyViewportHeight(nextHeight);
+    }
+  }
+
+  syncViewportHeight(true);
+  window.addEventListener('orientationchange', () => syncViewportHeight(true));
+  window.addEventListener('resize', () => syncViewportHeight());
+  window.visualViewport?.addEventListener('resize', () => syncViewportHeight());
 
   // durationMs 동안 0 -> targetVolume 로 페이드인
   function fadeIn(el, durationMs = 1500, targetVolume = 1.0) {

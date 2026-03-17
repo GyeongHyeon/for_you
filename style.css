@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
 
+:root {
+    --app-height: 100svh;
+}
+
 html,
 body {
     height: 100%;
@@ -17,7 +21,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    min-height: 100svh;
+    min-height: var(--app-height);
     overflow: clip;
     position: relative;
 }
@@ -118,8 +122,7 @@ body::after {
     backdrop-filter: blur(3px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-    max-height: 80vh;
-    max-height: 80svh;
+    max-height: min(80vh, calc(var(--app-height) - 80px));
     overflow-y: auto;
     overscroll-behavior-y: contain;
     -webkit-overflow-scrolling: touch;
