@@ -8,7 +8,7 @@
 </head>
 <body>
     <!-- 별똥별이 생성될 컨테이너 -->
-    <div id="star-field" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;"></div>
+    <div id="star-field"></div>
 
     <div class="container">
         <h1>To You, bak</h1>
@@ -120,6 +120,7 @@
 
 <script>
   const audio = document.getElementById('myAudio');
+  const container = document.querySelector('.container');
 
   // durationMs 동안 0 -> targetVolume 로 페이드인
   function fadeIn(el, durationMs = 1500, targetVolume = 1.0) {
@@ -152,6 +153,24 @@
   // 실패했을 때를 대비해, 첫 사용자 입력에서 다시 시도(가장 확실)
   document.addEventListener('pointerdown', playWithFadeIn, { once: true });
   document.addEventListener('touchend', playWithFadeIn, { once: true });
+
+  let touchStartY = 0;
+
+  container.addEventListener('touchstart', (event) => {
+    touchStartY = event.touches[0].clientY;
+  }, { passive: true });
+
+  container.addEventListener('touchmove', (event) => {
+    const currentY = event.touches[0].clientY;
+    const deltaY = currentY - touchStartY;
+    const atTop = container.scrollTop <= 0;
+    const atBottom =
+      container.scrollTop + container.clientHeight >= container.scrollHeight - 1;
+
+    if ((atTop && deltaY > 0) || (atBottom && deltaY < 0)) {
+      event.preventDefault();
+    }
+  }, { passive: false });
 
   /* --- 유성우(별똥별) 생성 로직 --- */
   function createShootingStar() {

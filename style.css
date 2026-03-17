@@ -1,14 +1,13 @@
-/* style.css */
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
 
-/* 전체 화면 설정 */
-html, body {
-    overscroll-behavior: none; /* 모바일에서 당겨서 새로고침 및 바운스 효과 제거 */
+html,
+body {
+    height: 100%;
+    overscroll-behavior: none;
 }
 
 body {
     font-family: 'Merriweather', serif;
-    /* 배경: 더 깊고 진한 우주 (남색, 보라색, 검은색의 조화) */
     background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
     color: #ffffff;
     margin: 0;
@@ -18,94 +17,95 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    min-height: 100dvh; /* 모바일 브라우저 주소창 대응 */
-    overflow: hidden; /* 유성우가 화면 밖으로 나가는 것을 숨김 */
+    min-height: 100svh;
+    overflow: clip;
     position: relative;
 }
 
-/* --- 은하수 및 별 효과 --- */
-/* ... (기존 코드 생략 가능하지만 도구 특성상 컨텍스트 유지를 위해 포함) ... */
+#star-field {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+}
 
-/* 고정된 별들 (반짝임 효과 포함) */
 body::before {
     content: "";
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-image: 
-        radial-gradient(1px 1px at 10% 20%, #fff, rgba(0,0,0,0)),
-        radial-gradient(1px 1px at 30% 50%, #fff, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 50% 30%, #fff, rgba(0,0,0,0)),
-        radial-gradient(1px 1px at 70% 80%, #fff, rgba(0,0,0,0)),
-        radial-gradient(1px 1px at 90% 10%, #fff, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 20% 70%, #fff, rgba(0,0,0,0));
+    inset: 0;
+    background-image:
+        radial-gradient(1px 1px at 10% 20%, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 30% 50%, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 50% 30%, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 70% 80%, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 90% 10%, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 20% 70%, #fff, rgba(0, 0, 0, 0));
     background-size: 200px 200px;
-    animation: twinkle 5s infinite; /* 별들이 반짝이는 애니메이션 */
+    animation: twinkle 5s infinite;
     z-index: -2;
     opacity: 0.6;
 }
 
 @keyframes twinkle {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 0.3; }
-}
+    0%,
+    100% {
+        opacity: 0.6;
+    }
 
-/* --- 유성우(별똥별) 스타일 --- */
+    50% {
+        opacity: 0.3;
+    }
+}
 
 .shooting-star {
     position: absolute;
-    width: 10px; /* 크기를 살짝 더 키움 */
+    width: 10px;
     height: 10px;
-    background: #ffffff; /* 순백색 */
+    background: #ffffff;
     border-radius: 50%;
-    /* 효과: 빛이 더 강하게 번지도록 그림자 농도와 범위 확대 */
-    box-shadow: 
+    box-shadow:
         0 0 15px 8px rgba(255, 255, 255, 0.7),
         0 0 30px 15px rgba(255, 255, 255, 0.5),
         0 0 60px 30px rgba(255, 255, 255, 0.3);
-    filter: blur(1px); /* 번짐은 유지하되 조금 더 선명하게 */
+    filter: blur(1px);
     z-index: -1;
     pointer-events: none;
     opacity: 0;
-    /* 애니메이션 설정 */
     animation-name: fall;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
 }
 
-/* 떨어지는 애니메이션: 10초 동안 천천히 화면을 대각선으로 가로지름 */
 @keyframes fall {
     0% {
         transform: translate(0, 0);
         opacity: 0;
     }
+
     10% {
-        opacity: 1; /* 최대 밝기로 나타남 */
+        opacity: 1;
     }
+
     90% {
         opacity: 1;
     }
+
     100% {
-        /* 우측 상단에서 좌측 하단으로 멀리 이동 */
         transform: translate(-120vw, 120vh);
         opacity: 0;
     }
 }
 
-/* --- 은하수 배경 강화 --- */
-
 body::after {
     content: "";
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    /* 성운(Nebula) 느낌의 은은한 보라빛 광채 */
-    background: 
+    inset: 0;
+    background:
         radial-gradient(circle at 20% 30%, rgba(100, 50, 255, 0.1) 0%, transparent 40%),
         radial-gradient(circle at 80% 70%, rgba(50, 150, 255, 0.1) 0%, transparent 40%);
     z-index: -3;
     pointer-events: none;
 }
-
-/* --- 편지지 및 콘텐츠 스타일 --- */
 
 .container {
     width: 90%;
@@ -113,23 +113,26 @@ body::after {
     margin: 40px auto;
     padding: 50px;
     position: relative;
-    /* 배경 투명도를 대폭 높임 (0.5 -> 0.15) */
     background: rgba(0, 0, 0, 0.15);
     border-radius: 15px;
-    /* 뒤쪽 별들이 더 선명하게 보이도록 블러 효과를 줄임 (8px -> 3px) */
-    backdrop-filter: blur(3px); 
+    backdrop-filter: blur(3px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-    /* 긴 편지 내용을 위해 세로 스크롤 허용 */
     max-height: 80vh;
-    max-height: 80dvh;
+    max-height: 80svh;
     overflow-y: auto;
-    overscroll-behavior-y: contain; /* 내부 스크롤이 끝에 도달했을 때 전체 페이지 흔들림 방지 */
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
 }
 
-/* 커스텀 스크롤바 (우주 테마) */
-.container::-webkit-scrollbar { width: 6px; }
-.container::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
+.container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
 
 h1 {
     color: #e0f2ff;
@@ -142,7 +145,7 @@ h1 {
 p {
     line-height: 1.8;
     color: #ffffff;
-    font-size: 14pt; 
+    font-size: 14pt;
     font-weight: 400;
     margin-bottom: 25px;
 }
