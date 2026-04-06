@@ -122,6 +122,30 @@ body::after {
     pointer-events: none;
 }
 
+.top-left-link {
+    position: fixed;
+    top: calc(16px + env(safe-area-inset-top, 0px));
+    left: calc(16px + env(safe-area-inset-left, 0px));
+    z-index: 5;
+    padding: 10px 14px;
+    border: 1px solid rgba(224, 242, 255, 0.9);
+    border-radius: 999px;
+    background: rgba(10, 14, 22, 0.32);
+    color: #e0f2ff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.top-left-link:hover {
+    background: rgba(18, 25, 38, 0.68);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+    transform: translateY(-1px);
+}
+
 .container {
     width: 90%;
     max-width: 800px;

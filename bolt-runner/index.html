@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <title>Bolt Runner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="hud-panel">
+      <div>
+        <p class="eyebrow">Arc Platform Shooter</p>
+        <h1>Bolt Runner</h1>
+        <p class="summary">
+          클래식 록맨 계열 감각을 바탕으로 만든 단일 스테이지 액션 게임입니다.
+          폐발전소를 돌파해 코어를 파괴하고 최고 점수를 노리면 됩니다.
+        </p>
+      </div>
+      <div class="rules">
+        <h2>규칙</h2>
+        <ul>
+          <li>`← →` 이동, `Z` 점프, `X` 사격, `R` 재시작</li>
+          <li>적 처치 100점, 공중 처치 150점, 연속 처치 콤보 보너스 최대 500점</li>
+          <li>체력칩은 HP 2 회복, 버스트 칩은 8초 동안 3연사, 기어 조각은 250점</li>
+          <li>피격 시 무적 1초, 낙사는 즉시 게임 오버</li>
+          <li>보스 격파 시 3000점, 남은 HP 1당 120점 추가</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="game-panel">
+      <div class="status-strip">
+        <div><span>HP</span><strong id="hpText">8 / 8</strong></div>
+        <div><span>SCORE</span><strong id="scoreText">0</strong></div>
+        <div><span>COMBO</span><strong id="comboText">x1</strong></div>
+        <div><span>POWER</span><strong id="powerText">NORMAL</strong></div>
+      </div>
+      <div class="audio-row">
+        <button id="audioToggle" type="button">SOUND ON</button>
+        <span id="audioHint">브라우저 정책 때문에 첫 입력 후 소리가 활성화됩니다.</span>
+      </div>
+      <canvas id="game" width="960" height="540"></canvas>
+      <div class="mobile-controls" aria-label="게임 터치 컨트롤">
+        <div class="mobile-control-row">
+          <div class="mobile-actions">
+            <button class="control-button action-a" type="button" data-key="KeyZ">A</button>
+            <button class="control-button action-b" type="button" data-key="KeyX">B</button>
+          </div>
+          <div class="mobile-pad">
+            <button class="control-button arrow-button" type="button" data-key="ArrowLeft">←</button>
+            <button class="control-button arrow-button" type="button" data-key="ArrowRight">→</button>
+          </div>
+        </div>
+        <div class="mobile-retry-row">
+          <button class="control-button secondary retry-button" type="button" data-key="KeyR">RETRY</button>
+        </div>
+      </div>
+      <div class="footer-note">
+        목표: 발전소 내부를 통과해 <strong>Scrap Brain</strong>을 파괴하라.
+      </div>
+    </section>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>
